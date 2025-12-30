@@ -1,0 +1,20 @@
+.card {
+    color: #69c0ff;
+    cursor: pointer;
+}
+
+
+.container {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center;
+}
+
+.title {
+    font-size: 12px;
+}
+
+.recent {
+    margin-right: 20px;
+    float: right;
+}

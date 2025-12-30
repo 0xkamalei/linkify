@@ -1,0 +1,25 @@
+.container {
+    background-image: url("./bg.jpg");
+}
+
+.content {
+    min-height: calc(100vh - 22px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.recent {
+    align-items: center;
+}
+
+.beian {
+    text-align: center;
+    color: #CFCFCF;
+}
+
+.slogan {
+    text-align: center;
+    color: #CFCFCF;
+    margin-left: 45px;
+}
