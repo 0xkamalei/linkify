@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Link as LinkIcon, Type, MessageSquare, Hash, Save, X } from 'lucide-react';
+import { Link as LinkIcon, Type, MessageSquare, Hash, Save, X, PlusCircle, Check, ChevronDown } from 'lucide-react';
 
 const SharePage: React.FC = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [topicOpen, setTopicOpen] = useState(false);
     const [formData, setFormData] = useState({
         title: '',
         link: '',
@@ -91,18 +92,51 @@ const SharePage: React.FC = () => {
                                 <Hash className="w-4 h-4 text-blue-600" />
                                 Select Topic
                             </label>
-                            <select
-                                required
-                                value={formData.topicId}
-                                onChange={e => setFormData({ ...formData, topicId: e.target.value })}
-                                className="w-full bg-neutral-50 border-2 border-neutral-100 rounded-2xl px-6 py-4 text-neutral-900 focus:border-blue-500 focus:bg-white outline-none transition-all font-bold appearance-none cursor-pointer"
-                            >
-                                <option value="" disabled>Choose a topic</option>
-                                <option value="tech">Technology</option>
-                                <option value="design">Design</option>
-                                <option value="ai">Artificial Intelligence</option>
-                                <option value="biz">Business</option>
-                            </select>
+                            <div className="relative">
+                                <button
+                                    type="button"
+                                    onClick={() => setTopicOpen(!topicOpen)}
+                                    className={`w-full bg-neutral-50 border-2 rounded-2xl px-6 py-4 text-left font-bold flex items-center justify-between transition-all ${topicOpen ? 'border-blue-500 bg-white ring-4 ring-blue-500/10' : 'border-neutral-100 hover:bg-white text-neutral-900'}`}
+                                >
+                                    <span className={formData.topicId ? 'text-neutral-900' : 'text-neutral-400'}>
+                                        {formData.topicId
+                                            ? { tech: 'Technology', design: 'Design', ai: 'Artificial Intelligence', biz: 'Business' }[formData.topicId]
+                                            : 'Choose a topic'}
+                                    </span>
+                                    <ChevronDown className={`w-5 h-5 text-neutral-400 transition-transform duration-300 ${topicOpen ? 'rotate-180 text-blue-500' : ''}`} />
+                                </button>
+
+                                {topicOpen && (
+                                    <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-neutral-100 rounded-2xl shadow-xl shadow-blue-500/10 overflow-hidden z-20 animate-in fade-in zoom-in-95 duration-200">
+                                        {[
+                                            { id: 'tech', label: 'Technology', desc: 'Code, Gadgets, Innovation' },
+                                            { id: 'design', label: 'Design', desc: 'UI/UX, Art, Creativity' },
+                                            { id: 'ai', label: 'Artificial Intelligence', desc: 'LLMs, ML, Future' },
+                                            { id: 'biz', label: 'Business', desc: 'Startups, Finance, Strategy' }
+                                        ].map((topic) => (
+                                            <button
+                                                key={topic.id}
+                                                type="button"
+                                                onClick={() => {
+                                                    setFormData({ ...formData, topicId: topic.id });
+                                                    setTopicOpen(false);
+                                                }}
+                                                className="w-full text-left px-6 py-4 hover:bg-blue-50 transition-colors flex items-center justify-between group border-b border-neutral-50 last:border-0"
+                                            >
+                                                <div>
+                                                    <span className={`block font-bold ${formData.topicId === topic.id ? 'text-blue-600' : 'text-neutral-900'}`}>
+                                                        {topic.label}
+                                                    </span>
+                                                    <span className="text-xs text-neutral-400 font-medium">{topic.desc}</span>
+                                                </div>
+                                                {formData.topicId === topic.id && (
+                                                    <Check className="w-5 h-5 text-blue-600" />
+                                                )}
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
                         </div>
 
                         {/* Tags */}
@@ -162,7 +196,5 @@ const SharePage: React.FC = () => {
         </div>
     );
 };
-
-import { PlusCircle } from 'lucide-react';
 
 export default SharePage;

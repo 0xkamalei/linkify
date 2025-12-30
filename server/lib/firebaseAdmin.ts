@@ -3,13 +3,15 @@ import admin from "firebase-admin";
 if (!admin.apps.length) {
     try {
         const privateKey = (process.env.FIREBASE_PRIVATE_KEY || "")
-            .replace(/^"(.*)"$/, '$1') // Remove surrounding quotes if present
+            .replace(/^"/, "")
+            .replace(/"$/, "")
+            .trim()
+            .replace(/,$/, "") // Remove likely trailing comma from copy-paste
             .replace(/\\n/g, "\n");
 
         console.log("Initializing Firebase Admin with Project ID:", process.env.FIREBASE_PROJECT_ID);
         console.log("Client Email exists:", !!process.env.FIREBASE_CLIENT_EMAIL);
-        console.log("Private Key length:", privateKey.length);
-        console.log("Private Key Header:", privateKey.substring(0, 50));
+
 
         admin.initializeApp({
             credential: admin.credential.cert({
