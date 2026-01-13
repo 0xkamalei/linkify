@@ -21,23 +21,26 @@ const RecentPage: React.FC = () => {
     };
 
     return (
-        <div className="max-w-4xl mx-auto space-y-10 animate-in fade-in duration-700">
-            <div className="bg-neutral-900 rounded-3xl p-10 text-white relative overflow-hidden shadow-2xl">
+        <div className="max-w-4xl mx-auto space-y-12">
+            <div className="bg-retro-border border-2 border-retro-border p-10 text-white relative overflow-hidden retro-shadow">
                 <div className="relative z-10">
-                    <h1 className="text-3xl font-extrabold flex items-center gap-3">
-                        <Timer className="w-8 h-8 text-blue-400" />
-                        Recent Discoveries
+                    <h1 className="text-4xl font-bold flex items-center gap-4 tracking-tighter uppercase italic">
+                        <Timer className="w-10 h-10 text-retro-accent" />
+                        Latest Transmissions
                     </h1>
-                    <p className="text-neutral-400 mt-2 font-medium">Catch up with the latest links shared by the community.</p>
+                    <p className="text-white/60 mt-4 font-mono font-bold text-xs uppercase tracking-widest leading-relaxed">
+                        Real-time feed of newly cataloged resources.<br />
+                        Archive status: <span className="text-retro-accent animate-pulse">SYNCHRONIZED</span>
+                    </p>
                 </div>
-                <div className="absolute top-0 right-0 w-64 h-full bg-gradient-to-l from-white/5 to-transparent"></div>
+                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-8">
                 {loading ? (
-                    <div className="space-y-4">
+                    <div className="space-y-6">
                         {[1, 2, 3, 4].map(i => (
-                            <div key={i} className="h-40 bg-white rounded-2xl border border-neutral-200 animate-pulse"></div>
+                            <div key={i} className="h-44 bg-white border-2 border-retro-border/10 animate-pulse"></div>
                         ))}
                     </div>
                 ) : links.length > 0 ? (
@@ -45,8 +48,10 @@ const RecentPage: React.FC = () => {
                         <LinkCard key={link.id} link={link} onVote={handleVote} />
                     ))
                 ) : (
-                    <div className="bg-white rounded-2xl border border-neutral-200 p-20 text-center">
-                        <p className="text-neutral-400">No recent activity found.</p>
+                    <div className="bg-white border-2 border-retro-border p-24 text-center retro-shadow-sm">
+                        <p className="text-retro-border/30 font-serif italic text-xl">
+                            The transmission buffer is currently empty.
+                        </p>
                     </div>
                 )}
             </div>

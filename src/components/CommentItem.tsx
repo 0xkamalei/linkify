@@ -13,62 +13,56 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment, onVote, onDelete, is
     const formatDate = (date: any) => {
         if (!date) return '';
         const d = date instanceof Date ? date : new Date(date.seconds * 1000);
-        return d.toLocaleDateString();
+        return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     };
 
     return (
-        <div className="group py-6 border-b border-neutral-100 last:border-0">
-            <div className="flex gap-4">
+        <div className="group py-8 border-b-2 border-retro-border/10 last:border-0">
+            <div className="flex gap-6">
                 {/* Avatar */}
-                <div className="w-10 h-10 rounded-full bg-neutral-50 border border-neutral-100 flex items-center justify-center flex-shrink-0 text-neutral-400">
-                    <UserIcon className="w-5 h-5" />
+                <div className="w-12 h-12 border-2 border-retro-border bg-white flex items-center justify-center flex-shrink-0 text-retro-border retro-shadow-sm">
+                    <UserIcon className="w-6 h-6" />
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 space-y-2">
+                <div className="flex-1 space-y-3">
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                            <span className="font-bold text-sm text-neutral-900">Anonymous</span>
-                            <span className="text-xs text-neutral-300">•</span>
-                            <span className="text-xs text-neutral-400 font-medium">
-                                {formatDate(comment.createTime)}
-                            </span>
+                        <div className="flex items-center gap-3 font-mono text-[10px] font-bold uppercase tracking-widest text-retro-border/60">
+                            <span className="text-retro-text">User_Archive_#{comment.id?.slice(-4)}</span>
+                            <span>/</span>
+                            <span>{formatDate(comment.createTime)}</span>
                         </div>
                     </div>
 
-                    <p className="text-neutral-700 leading-relaxed text-[15px]">
+                    <p className="text-retro-text leading-relaxed font-serif text-lg italic">
                         {comment.content}
                     </p>
 
-                    <div className="flex items-center gap-6 pt-2">
-                        <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-8 pt-4">
+                        <div className="flex items-center gap-6">
                             <button
                                 onClick={() => onVote(comment.id!, 1)}
-                                className="flex items-center gap-1.5 text-neutral-400 hover:text-blue-600 transition-colors group/btn"
+                                className="flex items-center gap-2 text-retro-border/60 hover:text-retro-accent transition-colors group/btn font-mono text-[10px] font-bold uppercase"
                             >
-                                <div className="p-1.5 rounded-lg group-hover/btn:bg-blue-50">
-                                    <ThumbsUp className="w-4 h-4" />
-                                </div>
-                                <span className="text-xs font-bold">{comment.agree || 0}</span>
+                                <ThumbsUp className="w-4 h-4" />
+                                <span>Agree / {comment.agree || 0}</span>
                             </button>
                             <button
                                 onClick={() => onVote(comment.id!, 2)}
-                                className="flex items-center gap-1.5 text-neutral-400 hover:text-red-600 transition-colors group/btn"
+                                className="flex items-center gap-2 text-retro-border/60 hover:text-red-600 transition-colors group/btn font-mono text-[10px] font-bold uppercase"
                             >
-                                <div className="p-1.5 rounded-lg group-hover/btn:bg-red-50">
-                                    <ThumbsDown className="w-4 h-4" />
-                                </div>
-                                <span className="text-xs font-bold">{comment.disagree || 0}</span>
+                                <ThumbsDown className="w-4 h-4" />
+                                <span>Reject / {comment.disagree || 0}</span>
                             </button>
                         </div>
 
                         {isOwner && (
                             <button
                                 onClick={() => onDelete?.(comment.id!)}
-                                className="flex items-center gap-1.5 text-neutral-300 hover:text-red-500 transition-colors ml-auto opacity-0 group-hover:opacity-100"
+                                className="flex items-center gap-2 text-retro-border/30 hover:text-red-600 transition-colors ml-auto font-mono text-[10px] font-bold uppercase"
                             >
                                 <Trash2 className="w-4 h-4" />
-                                <span className="text-xs font-bold">Delete</span>
+                                <span>Expunge</span>
                             </button>
                         )}
                     </div>

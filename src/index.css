@@ -1,1 +1,40 @@
 @import "tailwindcss";
+
+@theme {
+  --font-serif: "EB Garamond", serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-retro-bg: #FDFCF5;
+  --color-retro-card: #FFFFFF;
+  --color-retro-accent: #D2691E;
+  --color-retro-text: #1A1A1A;
+  --color-retro-border: #1A1A1A;
+}
+
+@layer base {
+  body {
+    @apply bg-retro-bg text-retro-text font-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-bold;
+  }
+}
+
+.retro-shadow {
+  box-shadow: 4px 4px 0px 0px #1A1A1A;
+}
+
+.retro-shadow-sm {
+  box-shadow: 2px 2px 0px 0px #1A1A1A;
+}
+
+.retro-shadow-hover:hover {
+  box-shadow: 6px 6px 0px 0px #1A1A1A;
+  transform: translate(-2px, -2px);
+}
+
+.retro-button {
+  @apply border-2 border-retro-border bg-white px-4 py-2 font-mono text-sm font-bold transition-all active:translate-x-0.5 active:translate-y-0.5 active:shadow-none retro-shadow-sm;
+}
+

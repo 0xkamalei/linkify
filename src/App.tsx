@@ -11,11 +11,22 @@ import AccountPage from './pages/AccountPage';
 import UserSpacePage from './pages/UserSpacePage';
 import { AuthProvider } from './contexts/AuthContext';
 
+// V2 Components
+import AppLayoutV2 from './layouts/AppLayoutV2';
+import DashboardPage from './pages/DashboardPage';
+
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
+          {/* V2 Routes - New Private Link Management Interface */}
+          <Route path="/app" element={<AppLayoutV2 />}>
+            <Route index element={<DashboardPage />} />
+            <Route path="settings" element={<div className="p-8">Settings Page (Coming Soon)</div>} />
+          </Route>
+
+          {/* V1 Routes - Legacy Social Platform (Keep for now) */}
           <Route element={<SiteLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/t/:topicId" element={<TopicPage />} />

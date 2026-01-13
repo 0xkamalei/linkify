@@ -30,80 +30,78 @@ const RegisterPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 animate-in fade-in duration-1000">
-            <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-3xl border border-neutral-200 shadow-2xl shadow-neutral-100 relative overflow-hidden">
-                <div className="absolute -top-10 -left-10 w-32 h-32 bg-blue-100 rounded-full blur-3xl opacity-50"></div>
-                <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-indigo-100 rounded-full blur-3xl opacity-50"></div>
-
-                <div className="relative">
-                    <div className="flex justify-center mb-6">
-                        <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-200">
-                            <UserPlus className="w-8 h-8 text-white" />
+        <div className="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-md w-full space-y-12 bg-white p-12 border-2 border-retro-border retro-shadow relative overflow-hidden">
+                <div className="relative text-center">
+                    <div className="flex justify-center mb-8">
+                        <div className="w-20 h-20 border-2 border-retro-border bg-retro-accent flex items-center justify-center retro-shadow-sm">
+                            <UserPlus className="w-10 h-10 text-white" />
                         </div>
                     </div>
-                    <h2 className="mt-2 text-center text-3xl font-extrabold text-neutral-900 tracking-tight">
-                        Create Account
+                    <h2 className="text-4xl font-bold text-retro-text tracking-tighter uppercase italic">
+                        Register Identity
                     </h2>
-                    <p className="mt-2 text-center text-sm text-neutral-500 font-medium">
-                        Join our community and start sharing amazing things.
+                    <p className="mt-4 text-xs font-mono font-bold text-retro-border/40 uppercase tracking-widest leading-relaxed">
+                        Secure your place in the archive.<br />
+                        New entries are subject to validation.
                     </p>
                 </div>
 
-                <form className="mt-8 space-y-6 relative" onSubmit={handleRegister}>
+                <form className="mt-8 space-y-8 relative" onSubmit={handleRegister}>
                     {error && (
-                        <div className="bg-red-50 border border-red-100 text-red-600 p-4 rounded-xl flex items-center gap-3 text-sm font-medium animate-in slide-in-from-top-2">
+                        <div className="bg-red-50 border-2 border-red-600 text-red-600 p-4 font-mono text-xs font-bold uppercase tracking-widest flex items-center gap-3">
                             <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                            {error}
+                            Error: {error}
                         </div>
                     )}
 
-                    <div className="space-y-4">
-                        <div className="space-y-1">
-                            <label className="text-xs font-bold text-neutral-400 uppercase tracking-widest px-1">Email Address</label>
+                    <div className="space-y-6">
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-mono font-bold text-retro-text uppercase tracking-[0.2em]">01. Email Identifier</label>
                             <div className="relative group">
                                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <Mail className="h-5 w-5 text-neutral-300 group-focus-within:text-blue-500 transition-colors" />
+                                    <Mail className="h-5 w-5 text-retro-border/30 group-focus-within:text-retro-accent transition-colors" />
                                 </div>
                                 <input
                                     type="email"
                                     required
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="block w-full pl-11 pr-4 py-4 bg-neutral-50 border-2 border-neutral-100 rounded-2xl text-neutral-900 focus:outline-none focus:border-blue-500 focus:bg-white transition-all font-medium placeholder:text-neutral-300"
-                                    placeholder="you@example.com"
+                                    className="block w-full pl-12 pr-4 py-4 bg-white border-2 border-retro-border text-retro-text focus:outline-none focus:bg-retro-bg/10 transition-all font-mono text-sm placeholder:text-retro-border/20"
+                                    placeholder="user@archive.net"
                                 />
                             </div>
                         </div>
 
-                        <div className="space-y-1">
-                            <label className="text-xs font-bold text-neutral-400 uppercase tracking-widest px-1">Password</label>
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-mono font-bold text-retro-text uppercase tracking-[0.2em]">02. Access Token</label>
                             <div className="relative group">
                                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <Lock className="h-5 w-5 text-neutral-300 group-focus-within:text-blue-500 transition-colors" />
+                                    <Lock className="h-5 w-5 text-retro-border/30 group-focus-within:text-retro-accent transition-colors" />
                                 </div>
                                 <input
                                     type="password"
                                     required
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="block w-full pl-11 pr-4 py-4 bg-neutral-50 border-2 border-neutral-100 rounded-2xl text-neutral-900 focus:outline-none focus:border-blue-500 focus:bg-white transition-all font-medium placeholder:text-neutral-300"
+                                    className="block w-full pl-12 pr-4 py-4 bg-white border-2 border-retro-border text-retro-text focus:outline-none focus:bg-retro-bg/10 transition-all font-mono text-sm placeholder:text-retro-border/20"
                                     placeholder="••••••••"
                                 />
                             </div>
                         </div>
 
-                        <div className="space-y-1">
-                            <label className="text-xs font-bold text-neutral-400 uppercase tracking-widest px-1">Confirm Password</label>
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-mono font-bold text-retro-text uppercase tracking-[0.2em]">03. Token Verification</label>
                             <div className="relative group">
                                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <ShieldCheck className="h-5 w-5 text-neutral-300 group-focus-within:text-blue-500 transition-colors" />
+                                    <ShieldCheck className="h-5 w-5 text-retro-border/30 group-focus-within:text-retro-accent transition-colors" />
                                 </div>
                                 <input
                                     type="password"
                                     required
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
-                                    className="block w-full pl-11 pr-4 py-4 bg-neutral-50 border-2 border-neutral-100 rounded-2xl text-neutral-900 focus:outline-none focus:border-blue-500 focus:bg-white transition-all font-medium placeholder:text-neutral-300"
+                                    className="block w-full pl-12 pr-4 py-4 bg-white border-2 border-retro-border text-retro-text focus:outline-none focus:bg-retro-bg/10 transition-all font-mono text-sm placeholder:text-retro-border/20"
                                     placeholder="••••••••"
                                 />
                             </div>
@@ -113,22 +111,27 @@ const RegisterPage: React.FC = () => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="group relative w-full flex justify-center py-4 px-4 border border-transparent text-sm font-bold rounded-2xl text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all active:scale-[0.98] shadow-xl shadow-blue-100 disabled:opacity-50"
+                        className="retro-button w-full py-4 text-base flex items-center justify-center gap-3"
                     >
                         {loading ? (
-                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                            <div className="w-5 h-5 border-2 border-retro-border/30 border-t-retro-border rounded-none animate-spin"></div>
                         ) : (
-                            'Create Account'
+                            <>
+                                <UserPlus className="w-5 h-5" />
+                                CREATE ENTRY
+                            </>
                         )}
                     </button>
-                </form>
 
-                <p className="mt-8 text-center text-sm text-neutral-600 font-medium">
-                    Already have an account?{' '}
-                    <Link to="/login" className="font-bold text-blue-600 hover:text-blue-700 transition-colors">
-                        Log in instead
-                    </Link>
-                </p>
+                    <div className="pt-8 border-t-2 border-retro-border/10 text-center">
+                        <p className="text-[10px] font-mono font-bold text-retro-border/40 uppercase tracking-widest">
+                            Already registered?{' '}
+                            <Link to="/login" className="text-retro-accent hover:underline decoration-2">
+                                Login to Identity
+                            </Link>
+                        </p>
+                    </div>
+                </form>
             </div>
         </div>
     );

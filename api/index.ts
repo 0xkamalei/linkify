@@ -7,9 +7,15 @@ import { voteService } from '../server/services/voteService'
 
 import { logger } from 'hono/logger'
 
+// Import V2 API
+import v2Api from './v2/index'
+
 export const app = new Hono().basePath('/api')
 
 app.use('*', logger())
+
+// Mount V2 API routes
+app.route('/', v2Api)
 
 app.onError((err, c) => {
     console.error('Hono Error:', err)

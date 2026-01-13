@@ -71,123 +71,125 @@ const LinkDetailPage: React.FC = () => {
 
     if (loading && !link) {
         return (
-            <div className="max-w-4xl mx-auto py-20 text-center">
-                <div className="w-12 h-12 border-4 border-blue-100 border-t-blue-600 rounded-full animate-spin mx-auto"></div>
-                <p className="text-neutral-400 mt-4 font-bold tracking-tight">Loading discussion...</p>
+            <div className="max-w-4xl mx-auto py-24 text-center">
+                <div className="w-12 h-12 border-2 border-retro-border/20 border-t-retro-accent rounded-none animate-spin mx-auto mb-6"></div>
+                <p className="text-retro-border font-mono font-bold uppercase tracking-widest text-sm italic">Synchronizing archive data...</p>
             </div>
         );
     }
 
     return (
-        <div className="max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="max-w-4xl mx-auto">
             {/* Back Button */}
-            <RouterLink to="/" className="inline-flex items-center gap-2 text-neutral-400 hover:text-blue-600 transition-colors mb-8 font-bold text-sm group">
+            <RouterLink to="/" className="inline-flex items-center gap-3 text-retro-border/40 hover:text-retro-accent transition-colors mb-10 font-mono font-bold text-[10px] uppercase tracking-[0.2em] group">
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                Back to Feed
+                Return to Main Archive
             </RouterLink>
 
             {/* Link Detail Header */}
             {link && (
-                <div className="bg-white rounded-3xl border border-neutral-200 p-8 md:p-10 shadow-sm mb-12 relative overflow-hidden">
-                    <div className="flex flex-col md:flex-row gap-8 items-start relative z-10">
+                <div className="bg-white border-2 border-retro-border retro-shadow p-8 md:p-12 mb-16 relative overflow-hidden">
+                    <div className="flex flex-col md:flex-row gap-10 items-start relative z-10">
                         {/* Vote Action */}
-                        <div className="flex md:flex-col items-center gap-2 bg-neutral-50 px-3 py-4 rounded-2xl md:min-w-[64px]">
+                        <div className="flex md:flex-col items-center gap-3 bg-retro-bg/30 border-2 border-retro-border/10 p-3 md:min-w-[72px]">
                             <button
                                 onClick={() => handleLinkVote(1)}
-                                className="p-1.5 hover:bg-blue-100 hover:text-blue-600 rounded-lg transition-colors text-neutral-400"
+                                className="p-2 hover:bg-retro-accent hover:text-white transition-all text-retro-border/30"
                             >
                                 <ArrowBigUp className="w-8 h-8" />
                             </button>
-                            <span className="text-lg font-extrabold text-neutral-900">{link.score || 0}</span>
+                            <span className="font-mono font-black text-xl text-retro-text tabular-nums">
+                                {link.agree - link.disagree}
+                            </span>
                             <button
-                                onClick={() => handleLinkVote(2)}
-                                className="p-1.5 hover:bg-red-100 hover:text-red-600 rounded-lg transition-colors text-neutral-400"
+                                onClick={() => handleLinkVote(-1)}
+                                className="p-2 hover:bg-retro-text hover:text-white transition-all text-retro-border/30"
                             >
                                 <ArrowBigDown className="w-8 h-8" />
                             </button>
                         </div>
 
+                        {/* Content */}
                         <div className="flex-1 space-y-6">
-                            <div className="flex items-center gap-4">
-                                <RouterLink to={`/t/${link.topicId}`} className="flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest hover:bg-blue-100 transition-colors">
+                            <div className="flex flex-wrap items-center gap-4 text-[10px] font-mono font-bold text-retro-accent uppercase tracking-widest">
+                                <span className="flex items-center gap-2 bg-retro-accent/5 px-2 py-1">
                                     <Hash className="w-3 h-3" />
                                     {link.topicId}
-                                </RouterLink>
-                                <div className="flex items-center gap-2 text-neutral-400 text-xs font-medium">
+                                </span>
+                                <span className="flex items-center gap-2 text-retro-border/40">
                                     <Clock className="w-3 h-3" />
-                                    2 hours ago
-                                </div>
+                                    ENTRY: {new Date(link.createdAt).toLocaleDateString()}
+                                </span>
                             </div>
 
-                            <h1 className="text-3xl md:text-4xl font-extrabold text-neutral-900 leading-tight tracking-tight">
+                            <h1 className="text-4xl md:text-5xl font-bold text-retro-text leading-[1.1] tracking-tighter italic">
                                 {link.title}
                             </h1>
 
-                            <a
-                                href={link.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group inline-flex items-center gap-3 bg-neutral-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-neutral-800 transition-all active:scale-[0.98] shadow-xl shadow-neutral-200"
-                            >
-                                <Globe className="w-5 h-5 text-blue-400" />
-                                Visit Official Website
-                                <ExternalLink className="w-4 h-4 opacity-50 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                            </a>
+                            <p className="text-retro-border/70 font-serif text-xl leading-relaxed">
+                                {link.description}
+                            </p>
 
-                            {link.firstComment && (
-                                <div className="bg-neutral-50 border-l-4 border-blue-500 p-6 rounded-r-2xl italic text-neutral-600 leading-relaxed text-lg">
-                                    "{link.firstComment}"
+                            <div className="pt-6 flex flex-wrap items-center gap-6">
+                                <a
+                                    href={link.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="retro-button px-8 py-4 flex items-center gap-3"
+                                >
+                                    <Globe className="w-5 h-5" />
+                                    ACCESS RESOURCE
+                                    <ExternalLink className="w-4 h-4 opacity-50" />
+                                </a>
+                                <div className="flex items-center gap-3 px-6 py-3 border-2 border-retro-border/10 bg-retro-bg/10 font-mono font-bold text-xs text-retro-border/60 uppercase tracking-widest">
+                                    <MessageSquare className="w-4 h-4" />
+                                    {comments.length} DEPOSITIONS
                                 </div>
-                            )}
+                            </div>
                         </div>
                     </div>
-                    {/* Decorative background circle */}
-                    <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
                 </div>
             )}
 
-            {/* Discussion Section */}
-            <div className="space-y-10">
-                <div className="flex items-center justify-between border-b border-neutral-200 pb-4">
-                    <h2 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
-                        <MessageSquare className="w-6 h-6 text-blue-600" />
-                        Discussion
-                        <span className="text-sm font-bold bg-neutral-100 text-neutral-500 px-3 py-1 rounded-full ml-2">
-                            {comments.length}
-                        </span>
+            {/* Comments Section */}
+            <div className="space-y-12">
+                <div className="flex items-center gap-4">
+                    <div className="h-[2px] flex-1 bg-retro-border/10"></div>
+                    <h2 className="text-[10px] font-mono font-bold text-retro-text uppercase tracking-[0.3em]">
+                        DEPOSITIONS_TRANSCRIPT
                     </h2>
-                    <div className="flex gap-4 text-sm font-bold">
-                        <button className="text-blue-600 border-b-2 border-blue-600 pb-4 -mb-4.5">Top</button>
-                        <button className="text-neutral-400 hover:text-neutral-600 transition-colors">Newest</button>
-                    </div>
+                    <div className="h-[2px] flex-1 bg-retro-border/10"></div>
                 </div>
 
-                <CommentEditor onSubmit={handleAddComment} submitting={submitting} />
+                <div className="bg-white border-2 border-retro-border p-8 md:p-10 retro-shadow-sm">
+                    <h3 className="text-lg font-bold text-retro-text uppercase italic mb-8 border-l-4 border-retro-accent pl-4">
+                        Submit New Entry
+                    </h3>
+                    <CommentEditor
+                        onSubmit={handleAddComment}
+                        submitting={submitting}
+                        placeholder="Provide your analysis for the archive..."
+                    />
+                </div>
 
-                {loading ? (
-                    <div className="space-y-4">
-                        {[1, 2, 3].map(i => (
-                            <div key={i} className="h-32 bg-white rounded-2xl border border-neutral-100 animate-pulse"></div>
-                        ))}
-                    </div>
-                ) : comments.length > 0 ? (
-                    <div className="bg-white rounded-3xl border border-neutral-200 p-8 md:px-12 shadow-sm">
-                        {comments.map(comment => (
+                <div className="space-y-8">
+                    {comments.length > 0 ? (
+                        comments.map((comment) => (
                             <CommentItem
                                 key={comment.id}
                                 comment={comment}
-                                onVote={handleCommentVote}
-                                isOwner={false} // Demo logic
+                                onVote={(isLike) => handleCommentVote(comment.id, isLike)}
+                                isOwner={false}
                             />
-                        ))}
-                    </div>
-                ) : (
-                    <div className="text-center py-20 bg-neutral-50 rounded-3xl border border-dashed border-neutral-200">
-                        <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl shadow-sm"> 💬 </div>
-                        <p className="text-neutral-900 font-bold text-xl mb-2">No comments yet</p>
-                        <p className="text-neutral-400">Be the first to share your thoughts on this resource!</p>
-                    </div>
-                )}
+                        ))
+                    ) : (
+                        <div className="text-center py-20 bg-retro-bg/10 border-2 border-dashed border-retro-border/10">
+                            <p className="text-retro-border/30 font-serif italic text-xl">
+                                Archive currently contains no secondary data for this entry.
+                            </p>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

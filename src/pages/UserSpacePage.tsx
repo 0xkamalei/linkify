@@ -26,58 +26,61 @@ const UserSpacePage: React.FC = () => {
     };
 
     return (
-        <div className="max-w-5xl mx-auto space-y-12 animate-in fade-in duration-700">
+        <div className="max-w-5xl mx-auto space-y-12">
             {/* User Profile Header */}
-            <div className="bg-white rounded-3xl border border-neutral-200 p-8 md:p-12 shadow-sm flex flex-col md:flex-row items-center md:items-start gap-8">
-                <div className="w-24 h-24 md:w-32 md:h-32 bg-indigo-600 rounded-[2rem] flex items-center justify-center text-white text-4xl font-black shadow-xl shadow-indigo-100 rotate-3">
+            <div className="bg-white border-2 border-retro-border p-8 md:p-12 retro-shadow flex flex-col md:flex-row items-center md:items-start gap-10">
+                <div className="w-24 h-24 md:w-32 md:h-32 bg-retro-accent border-2 border-retro-border flex items-center justify-center text-white text-4xl font-black retro-shadow-sm -rotate-2">
                     {userId?.charAt(0).toUpperCase()}
                 </div>
-                <div className="flex-1 text-center md:text-left space-y-4">
-                    <div className="space-y-1">
-                        <h1 className="text-3xl md:text-4xl font-black text-neutral-900 tracking-tight">
-                            {userId}'s Space
+                <div className="flex-1 text-center md:text-left space-y-6">
+                    <div className="space-y-2">
+                        <h1 className="text-4xl md:text-5xl font-bold text-retro-text tracking-tighter uppercase italic">
+                            Dossier: {userId}
                         </h1>
-                        <p className="text-neutral-500 font-bold flex items-center justify-center md:justify-start gap-2">
+                        <p className="text-retro-accent font-mono font-bold text-xs flex items-center justify-center md:justify-start gap-3 uppercase tracking-widest">
                             <User className="w-4 h-4" />
-                            Community Explorer
+                            CLASSIFIED EXPLORER
                         </p>
                     </div>
-                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
-                        <div className="bg-neutral-50 px-4 py-2 rounded-xl flex items-center gap-2 border border-neutral-100">
-                            <Activity className="w-4 h-4 text-indigo-500" />
-                            <span className="text-sm font-bold text-neutral-700">{links.length} Submissions</span>
+                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-6">
+                        <div className="bg-retro-bg/30 px-6 py-3 border-2 border-retro-border/10 flex items-center gap-3">
+                            <Activity className="w-4 h-4 text-retro-accent" />
+                            <span className="text-xs font-mono font-bold text-retro-text uppercase tracking-widest">{links.length} DISPATCHES</span>
                         </div>
-                        <div className="bg-neutral-50 px-4 py-2 rounded-xl flex items-center gap-2 border border-neutral-100">
-                            <Layout className="w-4 h-4 text-emerald-500" />
-                            <span className="text-sm font-bold text-neutral-700">Level 1</span>
+                        <div className="bg-retro-bg/30 px-6 py-3 border-2 border-retro-border/10 flex items-center gap-3">
+                            <Layout className="w-4 h-4 text-retro-accent" />
+                            <span className="text-xs font-mono font-bold text-retro-text uppercase tracking-widest">CLEARANCE_01</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* Submissions Feed */}
-            <div className="space-y-8">
-                <div className="flex items-center justify-between border-b border-neutral-200 pb-4">
-                    <h2 className="text-2xl font-black text-neutral-900 tracking-tight">Recent Submissions</h2>
+            <div className="space-y-10">
+                <div className="flex items-center gap-4">
+                    <div className="h-[2px] flex-1 bg-retro-border/10"></div>
+                    <h2 className="text-[10px] font-mono font-bold text-retro-text uppercase tracking-[0.3em]">
+                        ACTIVITY_LOG
+                    </h2>
+                    <div className="h-[2px] flex-1 bg-retro-border/10"></div>
                 </div>
 
                 {loading ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {[1, 2, 3, 4].map(i => (
-                            <div key={i} className="h-48 bg-white rounded-3xl border border-neutral-100 animate-pulse"></div>
+                            <div key={i} className="h-48 bg-white border-2 border-retro-border/10 animate-pulse"></div>
                         ))}
                     </div>
                 ) : links.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {links.map(link => (
                             <LinkCard key={link.id} link={link} onVote={handleVote} />
                         ))}
                     </div>
                 ) : (
-                    <div className="text-center py-24 bg-neutral-50 rounded-[3rem] border-2 border-dashed border-neutral-200">
-                        <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-3xl shadow-sm"> 🚀 </div>
-                        <h3 className="text-xl font-black text-neutral-900 mb-2">Passive Explorer Detected</h3>
-                        <p className="text-neutral-500 font-medium">This user hasn't shared any links yet. The journey begins with a single click!</p>
+                    <div className="text-center py-24 bg-retro-bg/20 border-2 border-dashed border-retro-border/10 retro-shadow-sm">
+                        <h3 className="text-xl font-serif italic text-retro-border/60 mb-4 italic">No transmissions recorded for this identifier.</h3>
+                        <p className="text-xs font-mono font-bold text-retro-accent uppercase tracking-widest">The archive remains silent.</p>
                     </div>
                 )}
             </div>

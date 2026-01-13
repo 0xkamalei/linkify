@@ -18,34 +18,37 @@ const CommentEditor: React.FC<CommentEditorProps> = ({ onSubmit, placeholder = "
     };
 
     return (
-        <div className="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm mb-8">
-            <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-neutral-100 flex items-center justify-center flex-shrink-0">
-                        <UserIcon className="w-5 h-5 text-neutral-400" />
+        <div className="bg-white border-2 border-retro-border p-8 mb-12 retro-shadow">
+            <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="flex gap-6">
+                    <div className="w-12 h-12 border-2 border-retro-border bg-retro-bg flex items-center justify-center flex-shrink-0 retro-shadow-sm">
+                        <UserIcon className="w-6 h-6 text-retro-border" />
                     </div>
                     <div className="flex-1">
                         <textarea
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
                             placeholder={placeholder}
-                            rows={3}
-                            className="w-full bg-neutral-50 border-2 border-neutral-100 rounded-xl px-4 py-3 text-neutral-900 focus:border-blue-500 focus:bg-white outline-none transition-all placeholder:text-neutral-300 resize-none font-medium"
+                            rows={4}
+                            className="w-full bg-white border-2 border-retro-border px-4 py-3 text-retro-text focus:bg-retro-bg/10 outline-none transition-all placeholder:text-retro-border/30 resize-none font-serif text-lg italic"
                         />
                     </div>
                 </div>
-                <div className="flex justify-end">
+                <div className="flex justify-between items-center">
+                    <span className="font-mono text-[10px] font-bold text-retro-border/40 uppercase tracking-widest">
+                        * Input required for archive entry
+                    </span>
                     <button
                         type="submit"
                         disabled={!content.trim() || submitting}
-                        className="bg-blue-600 text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-blue-700 transition-all active:scale-95 disabled:opacity-50 disabled:active:scale-100 flex items-center gap-2 shadow-lg shadow-blue-50"
+                        className="retro-button px-8 py-3 flex items-center gap-2"
                     >
                         {submitting ? (
-                            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                            <div className="w-4 h-4 border-2 border-retro-border/30 border-t-retro-border rounded-none animate-spin"></div>
                         ) : (
                             <Send className="w-4 h-4" />
                         )}
-                        Post Comment
+                        PUBLISH TO LOG
                     </button>
                 </div>
             </form>
